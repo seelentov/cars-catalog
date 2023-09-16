@@ -1,0 +1,58 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  input{
+    padding: 20px;
+    height: 30px;
+    width: 100%;
+  }
+  button{
+    height: 30px;
+    background: white;
+    color: black;
+    padding: 5px 20px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+      background: black;
+    color: white;
+    } 
+  }
+}
+
+
+
+.error {
+  color: red;
+  font-size: 14px;
+  display: none;
+}
+
+.loading{
+  width: 50%;
+  margin: 20px auto;
+  background:white;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 98px;
+  left: 25%;
+  & div{
+    width: 40%;
+    height: 100%;
+    position: relative;
+    background:green;
+    animation: toRight infinite 1s
+  }
+  @keyframes toRight{
+    0%{
+      left: -100%
+    }
+    100%{
+      left: 100%
+    }
+  }
+
+}

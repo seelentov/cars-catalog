@@ -1,0 +1,44 @@
+{
+  "cars": [
+    {
+      "name": "ASDASDAS",
+      "price": "12 312 321",
+      "image": "/public/car.jpg",
+      "desc": "",
+      "likes": [],
+      "id": 1
+    },
+    {
+      "name": "ASDASDA",
+      "price": "12 312 312 312",
+      "image": "/public/car.jpg",
+      "desc": "",
+      "likes": [],
+      "id": 2
+    },
+    {
+      "name": "ASDASDAS",
+      "price": "123 123 123",
+      "image": "/public/car.jpg",
+      "desc": "",
+      "likes": [],
+      "id": 3
+    },
+    {
+      "name": "ASDASD",
+      "price": "12 312 321",
+      "image": "/public/car.jpg",
+      "desc": "",
+      "likes": [],
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "name": "admin",
+      "pass": "admin",
+      "id": 1,
+      "email": "admin@test.ru"
+    }
+  ]
+}
