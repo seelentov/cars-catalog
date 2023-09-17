@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { IsAuth } from '../context/isAuth'
 import Account from './screens/Account/Account'
 import { Login } from './screens/Auth/Login'
 import { SignUp } from './screens/Auth/SignUp'
@@ -12,15 +13,17 @@ export const Router = () => {
 		<>
 			<BrowserRouter>
 				<Header />
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/cars' element={<Cars />} />
-					<Route path='/cars/:id' element={<CarsDetail />} />
-					<Route path='*' element={<PageNotFound />} />
-					<Route path='/my' element={<Account />} />
-					<Route path='/signup' element={<SignUp />} />
-					<Route path='/login' element={<Login />} />
-				</Routes>
+				<IsAuth>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/cars' element={<Cars />} />
+						<Route path='/cars/:id' element={<CarsDetail />} />
+						<Route path='*' element={<PageNotFound />} />
+						<Route path='/my' element={<Account />} />
+						<Route path='/signup' element={<SignUp />} />
+						<Route path='/login' element={<Login />} />
+					</Routes>
+				</IsAuth>
 			</BrowserRouter>
 		</>
 	)

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useGetTaskQuery } from '../../../store/api/cars.api'
-import { CarItem } from '../Cars/CarsCatalog'
+import { CarItem } from '../Cars/CarItem'
 import styles from '../Cars/CarsCatalog.module.scss'
 
 export const Favorites = ({ id }) => {

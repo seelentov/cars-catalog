@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useActions } from './../../../hooks/useActions'
 import { useThisStore } from './../../../hooks/useThisStore'
@@ -10,12 +9,6 @@ const Account = () => {
 	const navigate = useNavigate()
 	const { logout } = useActions()
 	const user = useThisStore('user')
-
-	useEffect(() => {
-		if (!user.email) {
-			navigate('/login')
-		}
-	}, [user.email, navigate])
 
 	const out = e => {
 		e.preventDefault()

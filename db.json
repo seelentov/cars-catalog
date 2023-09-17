@@ -1,36 +1,28 @@
 {
   "cars": [
     {
-      "name": "ASDASDAS",
-      "price": "12 312 321",
+      "name": "asdasd",
+      "price": 123,
       "image": "/public/car.jpg",
       "desc": "",
       "likes": [],
-      "id": 1
+      "id": 6
     },
     {
-      "name": "ASDASDA",
-      "price": "12 312 312 312",
+      "name": "sasdasd",
+      "price": 12312321,
       "image": "/public/car.jpg",
       "desc": "",
       "likes": [],
-      "id": 2
+      "id": 7
     },
     {
-      "name": "ASDASDAS",
-      "price": "123 123 123",
+      "name": "sdfsdf",
+      "price": 12312,
       "image": "/public/car.jpg",
       "desc": "",
       "likes": [],
-      "id": 3
-    },
-    {
-      "name": "ASDASD",
-      "price": "12 312 321",
-      "image": "/public/car.jpg",
-      "desc": "",
-      "likes": [],
-      "id": 4
+      "id": 8
     }
   ],
   "users": [

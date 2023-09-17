@@ -17,6 +17,7 @@ export const Form = ({ title, handleSubmit }) => {
 			<input
 				type='mail'
 				name='email'
+        required
 				value={email}
 				placeholder='E-mail'
 				onChange={e => setEmail(e.target.value)}
@@ -24,6 +25,7 @@ export const Form = ({ title, handleSubmit }) => {
 			<input
 				type='password'
 				name='pass'
+        required
 				placeholder='Пароль'
 				value={pass}
 				onChange={e => setPass(e.target.value)}

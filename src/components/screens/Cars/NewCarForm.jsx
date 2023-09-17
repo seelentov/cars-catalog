@@ -10,12 +10,11 @@ export const NewCarForm = () => {
 	const [postCar] = usePostTaskMutation()
 
 	const handleSubmit = e => {
-		const formatPrice = price =>
-			price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+		
 		e.preventDefault()
 		postCar({
-			name: name.toUpperCase(),
-			price: formatPrice(price),
+			name: name,
+			price: Number(price),
 			image: image ? image : '/public/car.jpg',
 			desc: '',
 			likes: [],
@@ -33,6 +32,7 @@ export const NewCarForm = () => {
 					pattern='[A-Za-zА-Яа-я\s]+'
 					type='text'
 					name='name'
+          required
 					value={name}
 					onChange={e => setName(e.target.value)}
 				></input>
@@ -45,6 +45,7 @@ export const NewCarForm = () => {
 					type='number'
 					name='price'
 					value={price}
+          required
 					onChange={e => setPrice(e.target.value)}
 				></input>
 			</label>

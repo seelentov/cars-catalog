@@ -1,22 +1,88 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom'
-import { useAuth } from '../../../hooks/useAuth'
-import { useThisStore } from '../../../hooks/useThisStore'
-import {
-	useAddToFavoriteMutation,
-	useDeleteTaskMutation,
-	useGetTaskQuery,
-	useUnFavoriteMutation,
-} from '../../../store/api/cars.api'
+import { useGetTaskQuery } from '../../../store/api/cars.api'
+import { CarItem } from './CarItem'
 import styles from './CarsCatalog.module.scss'
 
+import { useState } from 'react'
+import Select from 'react-select'
 export const CarsCatalog = () => {
 	const { isLoading, data } = useGetTaskQuery()
+	const [filterName, setFilterName] = useState('')
+	const [filter, setFilter] = useState([
+		{ value: 'id', label: 'ID' },
+		{ value: 'asc', label: 'ASC' },
+	])
+
+	const getFiltered = data => {
+		return data
+			.filter(car => {
+				if (filterName === '') {
+					return car
+				} else {
+					return car.name.includes(filterName)
+				}
+			})
+			.sort((a, b) => {
+				if (filter[0].value === 'name') {
+					return filter[1].value === 'asc'
+						? a.name.localeCompare(b.name)
+						: b.name.localeCompare(a.name)
+				} else if (filter[0].value === 'price') {
+					return filter[1].value === 'asc'
+						? a.price - b.price
+						: a.price + b.price
+				} else {
+					return filter[1].value === 'asc' ? a.id - b.id : a.id + b.id
+				}
+			})
+	}
+
+  const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: '#242424' }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        backgroundColor: isSelected ? 'white' : '#242424',
+        color: isSelected ? '#242424' : 'white',
+        cursor: isDisabled ? 'not-allowed' : 'default',
+      };
+    },
+  };
 
 	return (
 		<>
+			<input
+        placeholder='Поиск..'
+				className={styles.filter}
+				type='text'
+				name='filter'
+				value={filterName}
+				onChange={e => setFilterName(e.target.value)}
+			/>
+			<div className={styles.select}>
+        Сортировать: 
+				<Select
+					styles={colourStyles}
+					value={filter[0]}
+					options={[
+						{ value: 'id', label: 'ID' },
+						{ value: 'name', label: 'Имя' },
+						{ value: 'price', label: 'Цена' },
+					]}
+					onChange={e => setFilter([e, filter[1]])}
+				/>
+				<Select
+					styles={colourStyles}
+					value={filter[1]}
+					options={[
+						{ value: 'asc', label: 'ASC' },
+						{ value: 'desc', label: 'DESC' },
+					]}
+					onChange={e => setFilter([filter[0], e])}
+				/>
+			</div>
 			{isLoading && (
 				<div className={styles.loading}>
 					<div></div>
@@ -24,7 +90,7 @@ export const CarsCatalog = () => {
 			)}
 			<div className={styles.items}>
 				{data ? (
-					data.map(car => <CarItem key={car.id} car={car} />)
+					getFiltered(data).map(car => <CarItem key={car.id} car={car} />)
 				) : !isLoading ? (
 					<div className={styles.error}>
 						<p>Not Found</p>
@@ -34,44 +100,5 @@ export const CarsCatalog = () => {
 				)}
 			</div>
 		</>
-	)
-}
-
-export const CarItem = ({ car }) => {
-	const { id, image, name, price, likes } = car
-	const [deleteTask] = useDeleteTaskMutation()
-	const [addToFavorite] = useAddToFavoriteMutation()
-	const [unFavoriteQuery] = useUnFavoriteMutation()
-	const user = useThisStore('user')
-
-	const handleDelete = (e, id) => {
-		e.preventDefault()
-		deleteTask(id)
-	}
-	const handleFavorite = (e, id) => {
-		e.preventDefault()
-		addToFavorite({ id, user: user.id, likes })
-	}
-
-	const unFavorive = (e, id) => {
-		e.preventDefault()
-		unFavoriteQuery({ id, user: user.id, likes })
-	}
-	return (
-		<div className={styles.item}>
-			<img src={image} alt={name} />
-			<h2>{name}</h2>
-			<p>{price} $</p>
-			<Link to={`/cars/${id}`}>
-				<button>Read more</button>
-			</Link>
-			<button onClick={e => handleDelete(e, id)}>Delete</button>
-			{useAuth() &&
-				(likes.every(e => e !== user.id) ? (
-					<button onClick={e => handleFavorite(e, id)}>Add to favorite</button>
-				) : (
-					<button onClick={e => unFavorive(e, id)}>unfavorite</button>
-				))}
-		</div>
 	)
 }

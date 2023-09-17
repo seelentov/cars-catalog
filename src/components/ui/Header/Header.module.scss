@@ -11,6 +11,13 @@
     &:hover{
       background: black;
     color: white;
+    }
+    &:disabled{
+      opacity: 0.5;
+      &:hover{
+        background: white;
+    color: black;
+      }
     } 
   }
 }
