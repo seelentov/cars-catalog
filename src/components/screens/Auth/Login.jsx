@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useActions } from '../../../hooks/useActions'
 import styles from './Auth.module.scss'
 import { Form } from './Form'
+import { setCookieLogin } from '../../../service/cookieLogin'
 export const Login = ({ setPage }) => {
 	const { setUser } = useActions('user')
 	const [invalid, setInvalid] = useState(false)
@@ -23,6 +24,11 @@ export const Login = ({ setPage }) => {
 					id: user.uid,
 					token: user.accessToken,
 				})
+        setCookieLogin({
+          email: user.email,
+					id: user.uid,
+					token: user.accessToken,
+        })
 
 				navigate('/')
 			})

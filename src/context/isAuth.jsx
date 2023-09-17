@@ -4,8 +4,13 @@ import { Login } from '../components/screens/Auth/Login'
 import styles from '../components/screens/Home/Home.module.scss'
 import { useAuth } from '../hooks/useAuth'
 import { SignUp } from '../components/screens/Auth/SignUp'
+import { getCookieLogin } from '../service/cookieLogin'
+import { useActions } from '../hooks/useActions'
 export const IsAuth = ({ children }) => {
 	const [page, setPage] = useState(null)
+  const {setUser} = useActions()
+
+  getCookieLogin() && setUser(getCookieLogin())
 
 	return (
 		<>

@@ -1,13 +1,21 @@
-/* eslint-disable no-useless-escape */
+import Cookies from 'js-cookie'
 
-
-export function getCookie(name) {
-  let matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ))
-  return matches ? decodeURIComponent(matches[1]) : undefined
+export const setCookieLogin = ({id, token, email}) =>{
+  Cookies.set('id', id)
+  Cookies.set('token', token)
+  Cookies.set('email', email)
 }
 
-export const saveUserToCookie = ({ email, password }) => {
-  document.cookie = `ue=${email};up=${password}`
+export const getCookieLogin = () => {
+  return {
+    id: Cookies.get('id'),
+    token: Cookies.get('token'),
+    email: Cookies.get('email'),
+  }
+}
+
+export const clearCookieLogin = () => {
+    Cookies.remove('id')
+    Cookies.remove('token')
+    Cookies.remove('email')
 }

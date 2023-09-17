@@ -13,13 +13,9 @@ export const Header = () => {
 			<Link to='/cars'>
 				<button disabled={!useAuth()}>Cars</button>
 			</Link>
-			{useAuth() ? (
+			{useAuth() && (
 				<Link to='/my'>
 					<button>Account</button>
-				</Link>
-			) : (
-				<Link to='/login'>
-					<button>Login</button>
 				</Link>
 			)}
 		</header>

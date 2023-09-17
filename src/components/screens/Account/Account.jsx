@@ -1,19 +1,17 @@
-import { useNavigate } from 'react-router-dom'
 import { useActions } from './../../../hooks/useActions'
 import { useThisStore } from './../../../hooks/useThisStore'
 import { Favorites } from './Favorites'
-
 import styles from './Account.module.scss'
+import { clearCookieLogin } from './../../../service/cookieLogin';
 
 const Account = () => {
-	const navigate = useNavigate()
 	const { logout } = useActions()
 	const user = useThisStore('user')
 
 	const out = e => {
 		e.preventDefault()
 		logout()
-		navigate('/login')
+    clearCookieLogin()
 	}
 
 	return (
